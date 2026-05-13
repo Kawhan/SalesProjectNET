@@ -1,0 +1,38 @@
+﻿namespace SalesProject.Application.Branches.GetAllBranches;
+
+
+/// <summary>
+/// Represents a paginated result for the GetAllBranches operation.
+/// </summary>
+/// <remarks>
+/// This result contains the branches returned for the current page,
+/// along with pagination metadata such as current page, total pages,
+/// page size and total number of branches found.
+/// </remarks>
+public class GetAllBranchesPaginatedResult
+{
+    /// <summary>
+    /// Gets or sets the branches returned in the current page.
+    /// </summary>
+    public List<GetAllBranchesResult> Data { get; set; } = new();
+
+    /// <summary>
+    /// Gets or sets the current page number.
+    /// </summary>
+    public int CurrentPage { get; set; }
+
+    /// <summary>
+    /// Gets or sets the total number of pages available.
+    /// </summary>
+    public int TotalPages { get; set; }
+
+    /// <summary>
+    /// Gets or sets the number of items per page.
+    /// </summary>
+    public int PageSize { get; set; }
+
+    /// <summary>
+    /// Gets or sets the total number of branches found before pagination.
+    /// </summary>
+    public int TotalCount { get; set; }
+}

@@ -1,0 +1,28 @@
+<Solution>
+  <Folder Name="/Adapters/" />
+  <Folder Name="/Adapters/Driven/" />
+  <Folder Name="/Adapters/Driven/Infrastructure/">
+    <Project Path="src/SalesProject.ORM/SalesProject.ORM.csproj" />
+  </Folder>
+  <Folder Name="/Adapters/Drivers/" />
+  <Folder Name="/Adapters/Drivers/WebApi/">
+    <Project Path="src/SalesProject.WebApi/SalesProject.WebApi.csproj" />
+  </Folder>
+  <Folder Name="/Core/" />
+  <Folder Name="/Core/Application/">
+    <Project Path="src/SalesProject.Application/SalesProject.Application.csproj" />
+  </Folder>
+  <Folder Name="/Core/Domain/">
+    <Project Path="src/SalesProject.Domain/SalesProject.Domain.csproj" />
+  </Folder>
+  <Folder Name="/Crosscutting/">
+    <Project Path="src/SalesProject.Common/SalesProject.Common.csproj" />
+    <Project Path="src/SalesProject.IoC/SalesProject.IoC.csproj" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
+  <Project Path="docker-compose.dcproj">
+    <Build />
+  </Project>
+</Solution>

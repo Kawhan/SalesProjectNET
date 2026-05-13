@@ -1,0 +1,32 @@
+﻿using FluentValidation;
+using SalesProject.Domain.Enums;
+using SalesProject.Domain.Validation;
+
+namespace SalesProject.Application.Products.CreateProduct;
+
+/// <summary>
+/// Validator for CreateProductCommandValidator that defines validation rules for product creation command.
+/// </summary>
+public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
+{
+    /// <summary>
+    /// Initializes a new instance of the CreateProductCommandValidator with defined validation rules.
+    /// </summary>
+    /// <remarks>
+    /// Validation rules include:
+    /// - Name: Required, must be at least 3 characters long and at most 50 characters long
+    /// - CurrentPrice: Must be greater than zero
+    /// - Status: Cannot be set to Unknown
+    /// </remarks>
+    public CreateProductCommandValidator()
+    {
+        RuleFor(product => product.Name).SetValidator(new NameValidator());
+
+        RuleFor(product => product.CurrentPrice)
+            .GreaterThan(0)
+            .WithMessage("Product price must be greater than zero.");
+
+        RuleFor(product => product.Status).NotEqual(ProductStatus.Unknown);
+    }
+}
+

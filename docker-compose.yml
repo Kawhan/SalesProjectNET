@@ -1,0 +1,50 @@
+services:
+  salesproject.webapi:
+    container_name: salesproject_webapi
+    image: salesprojectwebapi
+    build:
+      context: .
+      dockerfile: src/SalesProject.WebApi/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: 8080
+      APPLY_MIGRATIONS: "true"
+      ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=salesproject;Username=postgres;Password=Pass@word"
+      ConnectionStrings__RabbitMq: "amqp://guest:guest@rabbitmq:5672"
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16
+    container_name: salesproject_postgres
+    environment:
+      POSTGRES_DB: SalesProject
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Pass@word
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - salesproject_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d SalesProject"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: salesproject_rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+volumes:
+  salesproject_postgres_data:
