@@ -22,7 +22,7 @@ services:
     image: postgres:16
     container_name: salesproject_postgres
     environment:
-      POSTGRES_DB: SalesProject
+      POSTGRES_DB: salesproject
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: Pass@word
     ports:
